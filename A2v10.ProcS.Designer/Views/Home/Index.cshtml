@@ -1,0 +1,22 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="procs-designer" id="mx-designer">
+
+</div>
+
+
+@section Scripts {
+	<script type="text/javascript">
+		// global mxGraph variables
+		var mxLoadStylesheets = false;
+		var mxLoadResources = false;
+	</script>
+	<script type="text/javascript" src="~/lib/mxClient.min.js"></script>
+	<script type="text/javascript">
+		new Vue({
+			el: "#mx-designer"
+		});
+	</script>
+}
