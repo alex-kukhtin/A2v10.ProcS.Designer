@@ -122,10 +122,13 @@
 		}
 
 		deleteTransition(tr) {
+			/*
 			var t = this.Transitions.indexOf(tr);
 			this.Transitions.splice(t, 1);
 			this.Transitions.forEach((t, ix) => t.Index = ix);
 			this.$removeTransitionFromGraph(tr);
+			*/
+			this.$repaint();
 		}
 	}
 

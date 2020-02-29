@@ -6,7 +6,7 @@
 <div class="graph-properties" ref="canvas">
 	<ul v-if="selected">
 		<li v-for="tr in selected.Transitions">
-			<span v-text="tr"></span><button @click.stop.prevent="removeTransaction(tr)">x</button>
+			<span v-text="tr.Name"></span><input type="text" v-model="tr.Name"/><button @click.stop.prevent="removeTransaction(tr)">x</button>
 		</li>
 	</ul>
 	<button @click.stop.prevent="addTransition">Add Transition</button>

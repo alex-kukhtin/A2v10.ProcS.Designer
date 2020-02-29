@@ -78,6 +78,7 @@
 		g.setCellsEditable(false);
 		g.setAllowDanglingEdges(false);
 		g.setConnectableEdges(false);
+		g.setDisconnectOnMove(false);
 
 		g.getLabel = function (cell) {
 			if (cell.edge) return '';
@@ -121,6 +122,27 @@
 
 		let ctors = window.app.$Constructors;
 
+		function updateStateGeometry(state, withtrans) {
+			let vertex = state.__Vertex;
+			let geo = vertex.getGeometry().clone();
+			geo.height = state.getHeight();
+			vertex.setGeometry(geo);
+			if (!withtrans)
+				return;
+			for (let tr of state.Transitions) {
+				let tvertex = tr.__Vertex;
+				let tv = tr.vertex;
+				let tg = tvertex.getGeometry().clone();
+				tg.x = tv.x;
+				tg.y = tv.y;
+				tg.width = tv.w;
+				tg.height = tv.h;
+				console.dir(tg);
+				g.getModel().setGeometry(tvertex, tg);
+			}
+		}
+
+
 		ctors.$State.prototype.$addTransitionToGraph = function (trns) {
 			g.getModel().beginUpdate();
 			try {
@@ -128,15 +150,34 @@
 				let tv = trns.vertex;
 				let cond = g.insertVertex(vertex, null, trns, tv.x, tv.y, tv.w, tv.h, tv.style, false);
 				trns.__Vertex = cond;
-				let geo = vertex.getGeometry();
-				geo.height = this.getHeight();
-				vertex.setGeometry(geo);
+				updateStateGeometry(this, false);
 			} finally {
 				g.getModel().endUpdate();
 			}
 		};
 
-		ctors.$State.prototype.$removeTr
+		ctors.$State.prototype.$removeTransitionFromGraph = function (tr) {
+			g.getModel().beginUpdate();
+			try {
+				let vertex = tr.__Vertex;
+				g.removeCells([vertex], true);
+				updateStateGeometry(this, true);
+			} finally {
+				g.getModel().endUpdate();
+			}
+		};
+
+		ctors.$State.prototype.$repaint = function () {
+			g.getModel().beginUpdate();
+			try {
+				console.dir('repaint');
+				let vertex = this.__Vertex;
+				console.dir(vertex);
+				g.updateCellSize(vertex, true);
+			} finally {
+				g.getModel().endUpdate();
+			}
+		};
 
 		return g;
 	}
@@ -158,7 +199,7 @@
 					for (let sub of v.vertices) {
 						let sv = sub.vertex;
 						let subVert = g.insertVertex(vert, null, sub, sv.x, sv.y, sv.w, sv.h, sv.style);
-						sv.__Vertex = sub;
+						sub.__Vertex = subVert;
 					}
 				}
 			}
