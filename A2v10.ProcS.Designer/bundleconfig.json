@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/js/site.js",
+    "inputFiles": [
+      "ClientApp/app.js"
+    ]
+  }
+]

@@ -5,7 +5,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app.js.map" />
+    <None Remove="ClientApp\app.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\app.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Scss\main.css" />
+    <Content Include="Scss\main.min.css" />
+    <Content Include="Scss\main.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\components\" />
     <Folder Include="wwwroot\css\fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+    <None Include="compilerconfig.json" />
   </ItemGroup>
 
 
