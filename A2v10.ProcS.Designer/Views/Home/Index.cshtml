@@ -1,9 +1,12 @@
-﻿@{
-	ViewData["Title"] = "Home Page";
+﻿@model WorkflowModel
+@{
+	Layout = "_LayoutDesigner";
 }
 
-<div class="procs-designer" id="mx-designer">
-
+<div class="procs-designer" id="procs-designer">
+	<a2-mxgraph-toolbox></a2-mxgraph-toolbox>
+	<a2-mxgraph-editor :model="model"></a2-mxgraph-editor>
+	<a2-mxgraph-properties :model="model"></a2-mxgraph-properties>
 </div>
 
 
@@ -14,9 +17,18 @@
 		var mxLoadResources = false;
 	</script>
 	<script type="text/javascript" src="~/lib/mxClient.min.js"></script>
-	<script type="text/javascript">
-		new Vue({
-			el: "#mx-designer"
-		});
+	<script type="text/javascript" src="~/js/designer.js"></script>
+	<script>
+		(function () {
+			let plainModel = @Html.Raw(@Model.ModelJson);
+			let ctors = window.app.$Constructors;
+			let stateMachine = new ctors.StateMachine(plainModel);
+			new Vue({
+				el: '#procs-designer',
+				data: {
+					model: stateMachine
+				}
+			});
+		})();
 	</script>
 }

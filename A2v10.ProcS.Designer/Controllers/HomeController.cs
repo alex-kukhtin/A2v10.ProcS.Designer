@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using A2v10.ProcS.Designer.Models;
+using System.IO;
 
 namespace A2v10.ProcS.Designer.Controllers
 {
@@ -20,7 +21,14 @@ namespace A2v10.ProcS.Designer.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			String fileName = Path.GetFullPath("./Workflows/simple.json");
+			String content = System.IO.File.ReadAllText(fileName);
+
+			var m = new WorkflowModel()
+			{
+				ModelJson = content
+			};
+			return View(m);
 		}
 
 		public IActionResult Privacy()

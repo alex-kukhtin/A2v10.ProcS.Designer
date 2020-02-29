@@ -1,0 +1,21 @@
+﻿{
+	"InitialState": "S1",
+	"$initPosition": {"x": 300, "y": 50},
+	"States": {
+		"S1": {
+			"$position": {"x": 205,"y": 200},
+			"Transitions": {
+				"T1": {
+					"Condition": "x == 1",
+					"To": "End"
+				}
+			}
+		},
+		"End": {
+			"$position": {
+				"x": 300,
+				"y": 550
+			}
+		}
+	}
+}

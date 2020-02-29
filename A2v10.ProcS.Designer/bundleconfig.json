@@ -1,8 +1,17 @@
 [
-  {
-    "outputFileName": "wwwroot/js/site.js",
-    "inputFiles": [
-      "ClientApp/app.js"
-    ]
-  }
+	{
+		"outputFileName": "wwwroot/js/site.js",
+		"inputFiles": [
+			"ClientApp/app.js"
+		]
+	},
+	{
+		"outputFileName": "wwwroot/js/designer.js",
+		"inputFiles": [
+			"ClientApp/designer/statemachine.js",
+			"ClientApp/designer/editor.js",
+			"ClientApp/designer/properties.js"
+		],
+		"minify": {"enabled": true}
+	}
 ]

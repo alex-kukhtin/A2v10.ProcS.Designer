@@ -19,8 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Scss\main.css" />
-    <Content Include="Scss\main.min.css" />
     <Content Include="Scss\main.scss" />
   </ItemGroup>
 
