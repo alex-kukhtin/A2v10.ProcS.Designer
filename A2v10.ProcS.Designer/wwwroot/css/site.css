@@ -35,3 +35,8 @@ body {
   height: 100%;
   grid-column: 2;
   background-color: #fcfcfc; }
+
+.graph-container {
+  background-color: #fcfcfc;
+  width: 800px;
+  height: 600px; }

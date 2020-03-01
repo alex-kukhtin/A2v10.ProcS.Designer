@@ -21,6 +21,11 @@ namespace A2v10.ProcS.Designer.Controllers
 
 		public IActionResult Index()
 		{
+			return View("Editor");
+		}
+
+		public IActionResult Index2()
+		{
 			String fileName = Path.GetFullPath("./Workflows/simple.json");
 			String content = System.IO.File.ReadAllText(fileName);
 

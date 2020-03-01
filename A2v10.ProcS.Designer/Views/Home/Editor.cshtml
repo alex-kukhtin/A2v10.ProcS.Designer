@@ -1,0 +1,25 @@
+﻿@model WorkflowModel
+@{
+	Layout = "_LayoutDesigner";
+}
+
+<h3>DIAGRAM EDITOR</h3>
+<div id="root">
+	<a2-graph-editor></a2-graph-editor>
+</div>
+
+
+@section Scripts {
+	<script type="text/javascript">
+		// global mxGraph variables
+		var mxLoadStylesheets = false;
+		var mxLoadResources = false;
+	</script>
+	<script type="text/javascript" src="~/lib/mxClient.min.js"></script>
+	<script type="text/javascript" src="~/js/editor.js"></script>
+	<script>
+		new Vue({
+			el:'#root'
+		});
+	</script>
+}
