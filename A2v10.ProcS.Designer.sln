@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A2v10.ProcS.Designer", "A2v10.ProcS.Designer\A2v10.ProcS.Designer.csproj", "{13A89393-380A-4301-A3EB-28A049121A1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A2v10.ProcS.Designer", "A2v10.ProcS.Designer\A2v10.ProcS.Designer.csproj", "{13A89393-380A-4301-A3EB-28A049121A1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

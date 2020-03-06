@@ -12,12 +12,14 @@
 			"ClientApp/designer/editor.js",
 			"ClientApp/designer/properties.js"
 		],
-		"minify": { "enabled": true }
+		"minify": { "enabled": false }
 	},
 	{
 		"outputFileName": "wwwroot/js/editor.js",
 		"inputFiles": [
+			"ClientApp/editor/shapes.js",
 			"ClientApp/editor/editor.js"
-		]
+		],
+		"minify": {"enabled": false }
 	}
 ]

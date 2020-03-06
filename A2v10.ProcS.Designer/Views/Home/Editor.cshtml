@@ -14,12 +14,15 @@
 		// global mxGraph variables
 		var mxLoadStylesheets = false;
 		var mxLoadResources = false;
+		// editor configuration
+		var mxEditorConfig = `@Html.Raw(Model.EditorConfigXml)`;
 	</script>
 	<script type="text/javascript" src="~/lib/mxClient.min.js"></script>
 	<script type="text/javascript" src="~/js/editor.js"></script>
 	<script>
 		new Vue({
-			el:'#root'
+			el: '#root',
+			model: @Html.Raw(Model.ModelJson)
 		});
 	</script>
 }

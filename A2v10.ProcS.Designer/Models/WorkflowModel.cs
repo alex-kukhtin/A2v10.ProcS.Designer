@@ -9,5 +9,6 @@ namespace A2v10.ProcS.Designer.Models
 	public class WorkflowModel
 	{
 		public String ModelJson { get; set; }
+		public String EditorConfigXml { get; set; }
 	}
 }

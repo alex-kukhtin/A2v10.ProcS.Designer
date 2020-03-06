@@ -21,17 +21,26 @@ namespace A2v10.ProcS.Designer.Controllers
 
 		public IActionResult Index()
 		{
-			return View("Editor");
+			String content = System.IO.File.ReadAllText(Path.GetFullPath("./Workflows/simple.json"));
+			String xmlConfig = System.IO.File.ReadAllText(Path.GetFullPath("./Config/editor.config.xml"));
+
+			var m = new WorkflowModel()
+			{
+				ModelJson = content,
+				EditorConfigXml = xmlConfig
+			};
+			return View("Editor", m);
 		}
 
 		public IActionResult Index2()
 		{
-			String fileName = Path.GetFullPath("./Workflows/simple.json");
-			String content = System.IO.File.ReadAllText(fileName);
+			String content = System.IO.File.ReadAllText(Path.GetFullPath("./Workflows/simple.json"));
+			String xmlConfig = System.IO.File.ReadAllText(Path.GetFullPath("./Config/editor.config.xml"));
 
 			var m = new WorkflowModel()
 			{
-				ModelJson = content
+				ModelJson = content,
+				EditorConfigXml = xmlConfig
 			};
 			return View(m);
 		}

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mxEditor>
+	<Array as="templates">
+		<add as="Task">
+			<Task label="Task label" description="task description">
+				<mxCell vertex="1" style="rounded">
+					<mxGeometry as="geometry" width="72" height="32"/>
+				</mxCell>
+			</Task>
+		</add>
+		<add as="Start">
+			<Start description="process start" label="Start label">
+				<mxCell vertex="1" style="shape=start;fillColor=#0691e5;resizable=0">
+					<mxGeometry as="geometry" width="50" height="50" x="200" y="10"/>
+				</mxCell>
+			</Start>
+		</add>
+		<add as="Condition">
+			<Condition description="process start" label="Start label">
+				<mxCell vertex="1" style="shape=condition;resizable=0">
+					<mxGeometry as="geometry" width="200" height="150" x="100" y="250"/>
+				</mxCell>
+			</Condition>
+		</add>
+	</Array>
+</mxEditor>
+
