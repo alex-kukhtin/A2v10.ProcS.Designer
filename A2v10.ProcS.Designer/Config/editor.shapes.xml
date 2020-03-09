@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<shapes>
+	<shape name="start" aspect="fixed">
+		<background>
+			<ellipse x="0" y="0" w="100" h="100"/>
+		</background>
+		<foreground>
+			<fillstroke />
+			<strokewidth width="5"/>
+			<strokecolor color="#ffffff"/>
+			<path>
+				<move x="36" y="25"/>
+				<line x="75" y="50"/>
+				<line x="36" y="75"/>
+				<close/>
+			</path>
+			<fillstroke/>
+		</foreground>
+	</shape>
+	<shape name="endSuccess" aspect="fixed">
+		<connections>
+			<constraint name="N" perimeter="0" x="0.5" y="0"/>
+			<constraint name="S" perimeter="0" x="0.5" y="1"/>
+			<constraint name="W" perimeter="0" x="0" y="0.5"/>
+			<constraint name="E" perimeter="0" x="1" y="0.5"/>
+		</connections>
+		<background>
+			<ellipse x="0" y="0" w="100" h="100"/>
+		</background>
+		<foreground>
+			<fillstroke />
+			<strokewidth width="7"/>
+			<strokecolor color="#ffffff"/>
+			<path>
+				<move x="20" y="50"/>
+				<line x="42" y="70"/>
+				<line x="78" y="30"/>
+			</path>
+			<fillstroke/>
+		</foreground>
+	</shape>
+	<shape name="endError" aspect="fixed">
+		<background>
+			<ellipse x="0" y="0" w="100" h="100"/>
+		</background>
+		<foreground>
+			<fillstroke />
+			<strokewidth width="7"/>
+			<strokecolor color="#ffffff"/>
+			<path>
+				<move x="30" y="30"/>
+				<line x="70" y="70"/>
+				<move x="30" y="70"/>
+				<line x="70" y="30"/>
+			</path>
+			<fillstroke/>
+		</foreground>
+	</shape>
+</shapes>

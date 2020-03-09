@@ -3,18 +3,36 @@
 	"$initPosition": {"x": 300, "y": 50},
 	"States": {
 		"S1": {
-			"$position": {"x": 205,"y": 200},
+			"$shape": "Condition",
+			"$position": {
+				"x": 205,
+				"y": 200
+			},
 			"Transitions": {
 				"T1": {
+					"$shape": "Transition",
 					"Condition": "x == 1",
 					"To": "End"
+				},
+				"T2": {
+					"$shape": "Transition",
+					"Condition": "x == 2",
+					"To": "Error"
 				}
 			}
 		},
 		"End": {
+			"$shape": "EndSuccess",
 			"$position": {
 				"x": 300,
-				"y": 550
+				"y": 450
+			}
+		},
+		"Error": {
+			"$shape": "EndError",
+			"$position": {
+				"x": 500,
+				"y": 350
 			}
 		}
 	}

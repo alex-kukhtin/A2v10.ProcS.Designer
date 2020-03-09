@@ -23,11 +23,13 @@ namespace A2v10.ProcS.Designer.Controllers
 		{
 			String content = System.IO.File.ReadAllText(Path.GetFullPath("./Workflows/simple.json"));
 			String xmlConfig = System.IO.File.ReadAllText(Path.GetFullPath("./Config/editor.config.xml"));
+			String xmlShapes = System.IO.File.ReadAllText(Path.GetFullPath("./Config/editor.shapes.xml"));
 
-			var m = new WorkflowModel()
+			var m = new WorkflowEditorModel()
 			{
 				ModelJson = content,
-				EditorConfigXml = xmlConfig
+				EditorConfigXml = xmlConfig,
+				EditorShapesXml = xmlShapes
 			};
 			return View("Editor", m);
 		}
@@ -37,7 +39,7 @@ namespace A2v10.ProcS.Designer.Controllers
 			String content = System.IO.File.ReadAllText(Path.GetFullPath("./Workflows/simple.json"));
 			String xmlConfig = System.IO.File.ReadAllText(Path.GetFullPath("./Config/editor.config.xml"));
 
-			var m = new WorkflowModel()
+			var m = new WorkflowEditorModel()
 			{
 				ModelJson = content,
 				EditorConfigXml = xmlConfig

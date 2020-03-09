@@ -10,30 +10,61 @@
 		let xml = MxEditorConfig;
 		var parser = new DOMParser();
 		var doc = parser.parseFromString(xml, "application/xml");
-		console.dir(doc);
 		return doc.documentElement;
 	}
 
 
-	function init(editor) {
+	function init(editor, source) {
+
 		let parent = editor.graph.getDefaultParent();
 		let model = editor.graph.model;
+
+		function insertTemplatedVertex(name, pos, p0) {
+			p0 = p0 || parent;
+			let tml = editor.templates[name];
+			let clone = model.cloneCell(tml);
+			clone.geometry.x = pos.x;
+			clone.geometry.y = pos.y;
+			// value is xml-node
+			// clone.value = null;
+			model.add(p0, clone);
+			return clone;
+		}
 
 		model.beginUpdate();
 		try {
 
-			let v = editor.graph.insertVertex(parent, null, "test", 20, 20, 80, 30);
-			console.dir(v);
+			// initial state
+			let init = { name: source.InitialState, pos: source.$initPosition, $vertex:null };
 
-			let tml = editor.templates['Start'];
-			let clone = model.cloneCell(tml);
-			console.dir(clone);
-			model.add(parent, clone);
+			init.$vertex = insertTemplatedVertex("Start", init.pos);
+
+			for (let s in source.States) {
+				let state = source.States[s];
+				let parent = insertTemplatedVertex(state.$shape, state.$position);
+				if (state.Transitions) {
+					let pos = { x: 10, y: 50 };
+					for (let t in state.Transitions) {
+						let trans = state.Transitions[t];
+						insertTemplatedVertex(trans.$shape, pos, parent);
+						pos.y += 50;
+					}
+				}
+			}
+
+			//insertTemplatedVertex("EndSuccess", { x: 200, y: 20 });
+			//insertTemplatedVertex("EndError", { x: 400, y: 20 });
+
 			
-			tml = editor.templates['Condition'];
-			clone = model.cloneCell(tml);
-			console.dir(clone);
-			model.add(parent, clone);
+			//tml = editor.templates['Condition'];
+			//clone = model.cloneCell(tml);
+			//console.dir(clone);
+			//model.add(parent, clone);
+
+			//var v6 = editor.graph.insertVertex(parent, null, 'X2', 340, 110, 80, 80, 'shape=endSuccess;');
+			//var v5 = editor.graph.insertVertex(parent, null, 'A4', 520, 220, 40, 80, 'shape=endError');
+			//var v7 = editor.graph.insertVertex(parent, null, 'O1', 250, 260, 80, 60, 'shape=or;direction=south');
+
 		}
 		finally {
 			model.endUpdate();
@@ -52,6 +83,9 @@
 	<div ref="canvas" class="graph-container"></div>
 </div>
 `,
+		props: {
+			model: Object
+		},
 		data: function () {
 			return {
 				editor: null
@@ -61,16 +95,15 @@
 			showModel: function () {
 				let codec = new MxCodec();
 				let result = codec.encode(this.$editor.graph.getModel());
-				let xml = MxUtils.getPrettyXml(result);
-				alert(xml);
+				//let xml = MxUtils.getPrettyXml(result);
+				//alert(xml);
 			}
 		},
 		mounted: function () {
 			let el = this.$refs.canvas;
 			this.$editor = new MxEditor(getConfig());
-			this.$editor.setGraphContainer(el);
 
-			console.dir(this.$editor.templates);
+			this.$editor.setGraphContainer(el);
 
 			let g = this.$editor.graph;
 			g.setPanning(true);
@@ -81,7 +114,9 @@
 			g.setConnectableEdges(false);
 			g.setDisconnectOnMove(false);
 
-			init(this.$editor);
+			init(this.$editor, this.model);
+
+			console.dir(g);
 		}
 	});
 })();

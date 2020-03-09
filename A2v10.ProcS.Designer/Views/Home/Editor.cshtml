@@ -1,11 +1,11 @@
-﻿@model WorkflowModel
+﻿@model WorkflowEditorModel
 @{
 	Layout = "_LayoutDesigner";
 }
 
 <h3>DIAGRAM EDITOR</h3>
 <div id="root">
-	<a2-graph-editor></a2-graph-editor>
+	<a2-graph-editor :model="source"></a2-graph-editor>
 </div>
 
 
@@ -15,14 +15,17 @@
 		var mxLoadStylesheets = false;
 		var mxLoadResources = false;
 		// editor configuration
-		var mxEditorConfig = `@Html.Raw(Model.EditorConfigXml)`;
+		window.mxEditorConfig = `@Html.Raw(Model.EditorConfigXml)`;
+		window.mxEditorShapes = `@Html.Raw(Model.EditorShapesXml)`;
 	</script>
 	<script type="text/javascript" src="~/lib/mxClient.min.js"></script>
 	<script type="text/javascript" src="~/js/editor.js"></script>
 	<script>
 		new Vue({
 			el: '#root',
-			model: @Html.Raw(Model.ModelJson)
+			data: {
+				source: @Html.Raw(Model.ModelJson),
+			}
 		});
 	</script>
 }

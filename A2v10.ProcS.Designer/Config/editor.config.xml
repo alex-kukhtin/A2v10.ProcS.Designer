@@ -9,19 +9,50 @@
 			</Task>
 		</add>
 		<add as="Start">
-			<Start description="process start" label="Start label">
-				<mxCell vertex="1" style="shape=start;fillColor=#0691e5;resizable=0">
-					<mxGeometry as="geometry" width="50" height="50" x="200" y="10"/>
+			<Start>
+				<mxCell vertex="1" style="shape=start;fillColor=#0691e5;strokeColor=#056fb0;resizable=0">
+					<mxGeometry as="geometry" width="50" height="50"/>
 				</mxCell>
 			</Start>
 		</add>
+		<add as="EndSuccess">
+			<EndSuccess>
+				<mxCell vertex="1" style="shape=endSuccess;fillColor=#57b557;strokeColor=#3c7d3c;resizable=0">
+					<mxGeometry as="geometry" width="50" height="50"/>
+				</mxCell>
+			</EndSuccess>
+		</add>
+		<add as="EndError">
+			<EndSuccess>
+				<mxCell vertex="1" style="shape=endError;fillColor=#f5644a;strokeColor=#ba4b38;resizable=0">
+					<mxGeometry as="geometry" width="50" height="50"/>
+				</mxCell>
+			</EndSuccess>
+		</add>
 		<add as="Condition">
 			<Condition description="process start" label="Start label">
-				<mxCell vertex="1" style="shape=condition;resizable=0">
-					<mxGeometry as="geometry" width="200" height="150" x="100" y="250"/>
+				<mxCell vertex="1" style="shape=condition;resizable=0;fillColor=azure">
+					<mxGeometry as="geometry" width="200" height="150" />
 				</mxCell>
 			</Condition>
 		</add>
+		<add as="Transition">
+			<Transition>
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;movable=0;">
+					<mxGeometry as="geometry" width="180" height="40"/>
+				</mxCell>
+			</Transition>
+		</add>
 	</Array>
+	<mxDefaultKeyHandler as="keyHandler">
+		<add as="90" control="1" action="undo"/>
+		<add as="89" control="1" action="redo"/>
+		<add as="46" action="delete" key="del"/>
+		<add as="88" control="1" action="cut"/>
+		<add as="67" control="1" action="copy"/>
+		<add as="86" control="1" action="paste"/>
+		<add as="107" action="zoomIn"/>
+		<add as="109" action="zoomOut"/>
+	</mxDefaultKeyHandler>
 </mxEditor>
 
