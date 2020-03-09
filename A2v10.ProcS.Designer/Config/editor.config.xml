@@ -55,6 +55,20 @@
 			</Code>
 		</add>
 	</Array>
+	<mxGraph as="graph">
+		<mxStylesheet as="stylesheet">
+			<add as="defaultEdge">
+				<add as="shape" value="connector"/>
+				<add as="elbow" value="vertical"/>
+				<add as="fontSize" value="10"/>
+				<add as="strokeColor" value="blue"/>
+				<add as="strokeWidth" value="2" />
+				<add as="rounded" value="1"/>
+				<add as="edgeStyle" value="orthogonalEdgeStyle"/>
+				<add as="endArrow" value="classic"/>
+			</add>
+		</mxStylesheet>
+	</mxGraph>
 	<mxDefaultKeyHandler as="keyHandler">
 		<add as="90" control="1" action="undo"/>
 		<add as="89" control="1" action="redo"/>
