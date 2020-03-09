@@ -4,35 +4,44 @@
 	"States": {
 		"S1": {
 			"$shape": "Condition",
+			"Name": "FIRST STATE NAME",
 			"$position": {
-				"x": 205,
-				"y": 200
+				"x": 220,
+				"y": 150
+			},
+			"OnEntry": {
+				"Activity": {
+					"Code": "result.x = 55"
+				}
 			},
 			"Transitions": {
 				"T1": {
 					"$shape": "Transition",
+					"Name": "X are equal 1",
 					"Condition": "x == 1",
-					"To": "End"
+					"To": "Error"
 				},
 				"T2": {
 					"$shape": "Transition",
+					"Name": "X are equal 2",
 					"Condition": "x == 2",
-					"To": "Error"
+					"To": "Success"
 				}
-			}
+			},
+			"NextState": "S1"
 		},
-		"End": {
+		"Success": {
 			"$shape": "EndSuccess",
 			"$position": {
 				"x": 300,
-				"y": 450
+				"y": 400
 			}
 		},
 		"Error": {
 			"$shape": "EndError",
 			"$position": {
-				"x": 500,
-				"y": 350
+				"x": 550,
+				"y": 190
 			}
 		}
 	}

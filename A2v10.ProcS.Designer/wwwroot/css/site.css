@@ -30,13 +30,26 @@ body {
   display: grid;
   grid-template-columns: auto 1fr auto; }
 
-.graph-canvas {
+.graph-editor {
+  display: grid;
   width: 100%;
   height: 100%;
-  grid-column: 2;
-  background-color: #fcfcfc; }
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr; }
 
 .graph-container {
+  grid-column: 2;
+  grid-row: 2;
   background-color: #fcfcfc;
-  width: 800px;
-  height: 600px; }
+  width: 100%;
+  height: 100%; }
+
+.graph-properties {
+  background-color: #f8fff9;
+  grid-column: 3;
+  grid-row: 2;
+  width: 240px; }
+
+.graph-toolbar {
+  grid-row: 1;
+  grid-column: 1/span 2; }

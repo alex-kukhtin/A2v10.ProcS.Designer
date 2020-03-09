@@ -1,48 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <mxEditor>
 	<Array as="templates">
-		<add as="Task">
-			<Task label="Task label" description="task description">
-				<mxCell vertex="1" style="rounded">
-					<mxGeometry as="geometry" width="72" height="32"/>
-				</mxCell>
-			</Task>
-		</add>
 		<add as="Start">
 			<Start>
 				<mxCell vertex="1" style="shape=start;fillColor=#0691e5;strokeColor=#056fb0;resizable=0">
-					<mxGeometry as="geometry" width="50" height="50"/>
+					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
 			</Start>
 		</add>
 		<add as="EndSuccess">
 			<EndSuccess>
 				<mxCell vertex="1" style="shape=endSuccess;fillColor=#57b557;strokeColor=#3c7d3c;resizable=0">
-					<mxGeometry as="geometry" width="50" height="50"/>
+					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
 			</EndSuccess>
 		</add>
 		<add as="EndError">
-			<EndSuccess>
+			<EndError>
 				<mxCell vertex="1" style="shape=endError;fillColor=#f5644a;strokeColor=#ba4b38;resizable=0">
-					<mxGeometry as="geometry" width="50" height="50"/>
+					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
-			</EndSuccess>
+			</EndError>
 		</add>
 		<add as="Condition">
-			<Condition insidetop="40">
+			<Condition Name="">
 				<mxCell vertex="1"
-						style="shape=swimlane;resizable=0;foldable=0;fillColor=azure;startSize=30">
+						style="shape=swimlane;resizable=0;foldable=1;fillColor=azure;strokeColor=#999999;startSize=30;rounded=0">
 					<mxGeometry as="geometry" width="200" height="150" />
 				</mxCell>
+				<properties>
+					<Name type="input" label="Name"/>
+				</properties>
 			</Condition>
 		</add>
 		<add as="Transition">
-			<Transition>
-				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;movable=0;">
+			<Transition Name="" Condition="">
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;strokeColor=#999999;movable=0">
+					<mxGeometry as="geometry" width="180" height="30"/>
+				</mxCell>
+				<properties>
+					<Name type="input" label="Name"/>
+					<Condition type="textarea" label="Condition"/>
+				</properties>
+			</Transition>
+		</add>
+		<add as="Code">
+			<Code Code="">
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ccdd8090;strokeColor=#999999;movable=0;">
 					<mxGeometry as="geometry" width="180" height="35"/>
 				</mxCell>
-			</Transition>
+				<properties>
+					<Code type="textarea" label="Code"/>
+				</properties>
+			</Code>
 		</add>
 	</Array>
 	<mxDefaultKeyHandler as="keyHandler">

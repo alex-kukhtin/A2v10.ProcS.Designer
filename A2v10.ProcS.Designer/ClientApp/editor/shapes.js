@@ -2,22 +2,8 @@
 
 (function () {
 
-	const MxUtils = window.mxUtils;
-	const MxCellRenderer = window.mxCellRenderer;
-	const MxShape = window.mxShape;
-	const MxSwimlane = window.mxSwimlane;
 	const MxEditorShapes = window.mxEditorShapes;
 	const MxStencilRegistry = window.mxStencilRegistry;
-
-	// Condition shape
-	function ConditionShape() {
-		MxSwimlane.call(this);
-		console.dir(this);
-	}
-
-	MxUtils.extend(ConditionShape, MxSwimlane);
-
-	MxCellRenderer.registerShape('condition', ConditionShape);
 
 	// register shapes from config
 	function getConfig() {
@@ -40,5 +26,5 @@
 			shape = shape.nextSibling;
 		}
 	})();
-	
+
 })();
