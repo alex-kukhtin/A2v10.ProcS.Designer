@@ -30,8 +30,9 @@
 			</EndSuccess>
 		</add>
 		<add as="Condition">
-			<Condition description="process start" label="Start label">
-				<mxCell vertex="1" style="shape=condition;resizable=0;fillColor=azure">
+			<Condition insidetop="40">
+				<mxCell vertex="1"
+						style="shape=swimlane;resizable=0;foldable=0;fillColor=azure;startSize=30">
 					<mxGeometry as="geometry" width="200" height="150" />
 				</mxCell>
 			</Condition>
@@ -39,7 +40,7 @@
 		<add as="Transition">
 			<Transition>
 				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;movable=0;">
-					<mxGeometry as="geometry" width="180" height="40"/>
+					<mxGeometry as="geometry" width="180" height="35"/>
 				</mxCell>
 			</Transition>
 		</add>

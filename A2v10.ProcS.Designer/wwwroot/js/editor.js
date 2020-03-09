@@ -87,13 +87,15 @@
 			for (let s in source.States) {
 				let state = source.States[s];
 				let parent = insertTemplatedVertex(state.$shape, state.$position);
+				// console.dir(parent.value.getAttribute('insidetop'));
 				if (state.Transitions) {
-					let pos = { x: 10, y: 50 };
+					let pos = { x: 10, y: 40 };
 					for (let t in state.Transitions) {
 						let trans = state.Transitions[t];
 						insertTemplatedVertex(trans.$shape, pos, parent);
-						pos.y += 50;
+						pos.y += 45;
 					}
+					parent.geometry.height = pos.y;
 				}
 			}
 
