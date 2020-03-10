@@ -62,10 +62,11 @@
 
 	Vue.component("a2-graph-properties", {
 		template: 
-`<div class="graph-properties" v-if="visible">
-	<h4 v-text="title"></h4>
-	<span v-text="p.type" v-for="p in modelProps" :prop="p" />
-	<component :is="p.type" v-for="p in modelProps" :prop="p" :model="model" :updateValue="updateValue" />
+`<div class="graph-properties" :key="updateKey">
+	<div v-if="visible">
+		<h4 v-text="title"></h4>
+		<component :is="p.type" v-for="p in modelProps" :prop="p" :model="model" :updateValue="updateValue" />
+	<div>
 </div>
 `,
 		components: {
@@ -73,11 +74,11 @@
 			'a2-prop-textarea': textareaProp
 		},
 		props: {
-			model: Object,
 			getEditor: Function
 		},
 		data: function () {
 			return {
+				model: null,
 				updateKey: 0
 			};
 		},
@@ -120,7 +121,17 @@
 				} finally {
 					m.endUpdate();
 				}
+			},
+			__onSelect: function (elem) {
+				this.model = elem;
+				this.updateKey += 1;
 			}
+		},
+		mounted: function () {
+			eventBus.$on('cell.select', this.__onSelect);
+		},
+		beforeDestroy() {
+			eventBus.$off('cell.select', this.__onSelect);
 		}
 	});
 })();

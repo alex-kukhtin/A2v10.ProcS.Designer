@@ -15,6 +15,11 @@
 		return doc.documentElement;
 	}
 
+	function blur() {
+		if (document.activeElement)
+			document.activeElement.blur();
+	}
+
 	function init(editor, source) {
 
 		let parent = editor.graph.getDefaultParent();
@@ -55,14 +60,14 @@
 				let parent = insertTemplatedVertex(state.$shape, state.$position);
 				setVertexAttributes(state, parent);
 				state.$vertex = parent;
-				// console.dir(parent.value.getAttribute('insidetop'));
 				if (state.Transitions) {
-					let pos = { x: 10, y: 40 };
+					insertTemplatedVertex("Entry", { x: 10, y: 40 }, parent);
+					let pos = { x: 10, y: 100 };
 					for (let t in state.Transitions) {
 						let trans = state.Transitions[t];
 						trans.$vertex = insertTemplatedVertex(trans.$shape, pos, parent);
 						setVertexAttributes(trans, trans.$vertex);
-						pos.y += 45;
+						pos.y += 40;
 					}
 					parent.geometry.height = pos.y;
 				}
@@ -122,7 +127,7 @@
 		<button @click.stop.prevent="showModel">Show Model</button>
 	</div>
 	<div ref="canvas" class="graph-container"></div>
-	<a2-graph-properties :model="selectedObject" :getEditor="getEditor" class="graph-properties"><a2-editor-properties>
+	<a2-graph-properties :getEditor="getEditor" class="graph-properties"><a2-editor-properties>
 </div>
 `,
 		props: {
@@ -130,8 +135,7 @@
 		},
 		data: function () {
 			return {
-				editor: null,
-				selectedObject: null
+				editor: null
 			};
 		},
 		methods: {
@@ -165,9 +169,7 @@
 			g.setTooltips(false);
 
 			g.getModel().addListener(MxEvent.CHANGE, (model, evt) => {
-				if (document.activeElement)
-					document.activeElement.blur();
-
+				blur();
 				for (let ch of evt.properties.changes) {
 					if (!ch.cell || !ch.cell.value) continue;
 					eventBus.$emit('cell.change', ch.cell);
@@ -175,14 +177,15 @@
 			});
 
 			g.getSelectionModel().addListener(MxEvent.CHANGE, (model, evt) => {
+				blur();
 				if (model.cells.length === 1) {
 					let cell = model.cells[0];
 					if (cell.value) {
-						this.selectedObject = cell;
+						eventBus.$emit('cell.select', cell);
 						return;
 					}
 				}
-				this.selectedObject = null;
+				eventBus.$emit('cell.select', null);
 			});
 
 			init(this.$editor, this.model);

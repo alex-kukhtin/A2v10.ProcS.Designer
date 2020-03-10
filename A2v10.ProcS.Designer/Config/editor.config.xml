@@ -3,21 +3,21 @@
 	<Array as="templates">
 		<add as="Start">
 			<Start>
-				<mxCell vertex="1" style="shape=start;fillColor=#0691e5;strokeColor=#056fb0;resizable=0">
+				<mxCell vertex="1" style="shape=start;fillColor=#0691e5;strokeColor=#056fb0;resizable=0;">
 					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
 			</Start>
 		</add>
 		<add as="EndSuccess">
 			<EndSuccess>
-				<mxCell vertex="1" style="shape=endSuccess;fillColor=#57b557;strokeColor=#3c7d3c;resizable=0">
+				<mxCell vertex="1" style="shape=endSuccess;fillColor=#57b557;strokeColor=#3c7d3c;resizable=0;">
 					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
 			</EndSuccess>
 		</add>
 		<add as="EndError">
 			<EndError>
-				<mxCell vertex="1" style="shape=endError;fillColor=#f5644a;strokeColor=#ba4b38;resizable=0">
+				<mxCell vertex="1" style="shape=endError;fillColor=#f5644a;strokeColor=#ba4b38;resizable=0;">
 					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
 			</EndError>
@@ -25,7 +25,7 @@
 		<add as="Condition">
 			<Condition Name="">
 				<mxCell vertex="1"
-						style="shape=swimlane;resizable=0;foldable=1;fillColor=azure;strokeColor=#999999;startSize=30;rounded=0">
+						style="shape=swimlane;resizable=0;foldable=1;fillColor=azure;strokeColor=#999999;startSize=30;rounded=0;">
 					<mxGeometry as="geometry" width="200" height="150" />
 				</mxCell>
 				<properties>
@@ -35,7 +35,7 @@
 		</add>
 		<add as="Transition">
 			<Transition Name="" Condition="">
-				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;strokeColor=#999999;movable=0">
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;strokeColor=#999999;movable=0;">
 					<mxGeometry as="geometry" width="180" height="30"/>
 				</mxCell>
 				<properties>
@@ -43,6 +43,13 @@
 					<Condition type="textarea" label="Condition"/>
 				</properties>
 			</Transition>
+		</add>
+		<add as="Entry">
+			<Entry>
+				<mxCell vertex="1" style="shape=swimlane;resizable=0;fillColor=#23dd9050;strokeColor=#999999;movable=0;startSize=20;foldable=1;">
+					<mxGeometry as="geometry" width="180" height="50"/>
+				</mxCell>
+			</Entry>
 		</add>
 		<add as="Code">
 			<Code Code="">

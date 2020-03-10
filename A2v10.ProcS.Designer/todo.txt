@@ -1,8 +1,17 @@
 ﻿
 1. Создание новых узлов
-2. Курсор на метках с иконками
 
 
 dragsource.html - для toolbar?
 
-если не убрать курсор из поля свойства и перейти на другой элемент, то не сохраняются изменения
+6. Реальная модель 
+7. Картинка expand
+8. Condition AutoSize
+9. Connector constraints
+10. Тексты
+11. OnEntry, OnExit
+12. Toolbar
+
+
+samples for:
+guides.html
