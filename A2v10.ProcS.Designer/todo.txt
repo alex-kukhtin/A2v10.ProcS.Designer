@@ -15,3 +15,13 @@ dragsource.html - для toolbar?
 
 samples for:
 guides.html
+menustyle.html - context menus
+monitor.html - animation and icons
+offpage.html - два блока?
+orthogonal.html - разные точки соединенияя
+pagebreaks.html - страницы и печать
+permissions.html - запреты
+portrefs.html - порты подключения
+secondlabel.html - несколько меток
+validation.html - возможность связывать разные типы узлов
+
