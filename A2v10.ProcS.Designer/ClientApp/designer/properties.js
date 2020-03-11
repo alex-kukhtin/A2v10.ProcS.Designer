@@ -1,6 +1,7 @@
 ﻿(function () {
 
-	const eventBus = window.app.$EventBus;
+	const eventBus = require('std:eventBus');
+
 	const graphProperties = {
 		template: `
 <div class="graph-properties" ref="canvas">

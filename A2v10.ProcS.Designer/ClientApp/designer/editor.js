@@ -1,6 +1,6 @@
 ﻿(function () {
 
-	const eventBus = window.app.$EventBus;
+	const eventBus = require('std:eventBus');
 
 	const MxGraph = window.mxGraph;
 	const MxEdgeStyle = window.mxEdgeStyle;

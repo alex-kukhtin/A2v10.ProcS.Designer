@@ -5,12 +5,13 @@
 dragsource.html - для toolbar?
 
 6. Реальная модель 
-7. Картинка expand
 8. Condition AutoSize
 9. Connector constraints
-10. Тексты
+10. Тексты getLabel?
 11. OnEntry, OnExit
 12. Toolbar
+13. Fold/Unfold image
+14. SCSS variables (font)
 
 
 samples for:

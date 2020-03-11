@@ -1,6 +1,6 @@
 (function () {
 
-	const eventBus = window.app.$EventBus;
+	const eventBus = require('std:eventBus');
 
 	function updateGlobal() {
 		eventBus.$emit('editor.update');
@@ -150,7 +150,7 @@
 })();
 (function () {
 
-	const eventBus = window.app.$EventBus;
+	const eventBus = require('std:eventBus');
 
 	const MxGraph = window.mxGraph;
 	const MxEdgeStyle = window.mxEdgeStyle;
@@ -374,7 +374,8 @@
 })();
 (function () {
 
-	const eventBus = window.app.$EventBus;
+	const eventBus = require('std:eventBus');
+
 	const graphProperties = {
 		template: `
 <div class="graph-properties" ref="canvas">

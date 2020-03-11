@@ -22,16 +22,18 @@
 				</mxCell>
 			</EndError>
 		</add>
-		<add as="Condition">
-			<Condition Name="">
+		<add as="State">
+			<State Name="">
 				<mxCell vertex="1"
-						style="shape=swimlane;resizable=0;foldable=1;fillColor=azure;strokeColor=#999999;startSize=30;rounded=0;">
-					<mxGeometry as="geometry" width="200" height="150" />
+						style="shape=swimlane;resizable=0;autosize=1;foldable=1;fillColor=azure;strokeColor=#999999;startSize=30;rounded=0;">
+					<mxGeometry as="geometry" width="200" height="70">
+						<mxRectangle as="alternateBounds" width="200" height="70" />
+					</mxGeometry>
 				</mxCell>
 				<properties>
 					<Name type="input" label="Name"/>
 				</properties>
-			</Condition>
+			</State>
 		</add>
 		<add as="Transition">
 			<Transition Name="" Condition="">

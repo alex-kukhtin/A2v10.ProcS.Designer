@@ -17,8 +17,10 @@
 	{
 		"outputFileName": "wwwroot/js/editor.js",
 		"inputFiles": [
+			"ClientApp/editor/model.js",
 			"ClientApp/editor/shapes.js",
 			"ClientApp/editor/properties.js",
+			"ClientApp/editor/toolbox.js",
 			"ClientApp/editor/editor.js"
 		],
 		"minify": {"enabled": false }

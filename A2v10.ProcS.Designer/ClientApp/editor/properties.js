@@ -2,7 +2,8 @@
 (function () {
 
 	const MxCellAttributeChange = window.mxCellAttributeChange;
-	const eventBus = window.app.$EventBus;
+
+	const eventBus = require('std:eventBus');
 
 	const baseProp = {
 		props: {
@@ -66,7 +67,8 @@
 	<div v-if="visible">
 		<h4 v-text="title"></h4>
 		<component :is="p.type" v-for="p in modelProps" :prop="p" :model="model" :updateValue="updateValue" />
-	<div>
+	</div>
+	<pre class="code" v-text="modelText"/>
 </div>
 `,
 		components: {
@@ -74,6 +76,7 @@
 			'a2-prop-textarea': textareaProp
 		},
 		props: {
+			modelText: String,
 			getEditor: Function
 		},
 		data: function () {

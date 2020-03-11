@@ -6,15 +6,15 @@
 		</background>
 		<foreground>
 			<fillstroke />
-			<strokewidth width="5"/>
-			<strokecolor color="#ffffff"/>
+			<strokewidth width="0"/>
+			<fillcolor color="#ffffff"/>
 			<path>
-				<move x="36" y="25"/>
-				<line x="75" y="50"/>
-				<line x="36" y="75"/>
+				<move x="34" y="22"/>
+				<line x="79" y="50"/>
+				<line x="34" y="78"/>
 				<close/>
 			</path>
-			<fillstroke/>
+			<fill/>
 		</foreground>
 	</shape>
 	<shape name="endSuccess" aspect="fixed">

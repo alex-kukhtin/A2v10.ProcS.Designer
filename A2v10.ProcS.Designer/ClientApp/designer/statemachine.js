@@ -1,7 +1,7 @@
 ﻿
 (function () {
 
-	const eventBus = window.app.$EventBus;
+	const eventBus = require('std:eventBus');
 
 	function updateGlobal() {
 		eventBus.$emit('editor.update');
