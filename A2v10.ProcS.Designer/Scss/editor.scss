@@ -33,6 +33,18 @@
 	grid-column:1;
 	grid-row:2;
 	width:170px;
+
+	ul {
+		padding:0;
+		margin:10px 0;
+		list-style:none;
+	}
+	li {
+		padding:8px;
+		margin:3px;
+		background-color:#e9e8d5;
+		cursor:pointer;
+	}
 }
 
 

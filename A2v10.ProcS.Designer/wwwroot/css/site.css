@@ -59,6 +59,15 @@ body {
   grid-column: 1;
   grid-row: 2;
   width: 170px; }
+  .graph-toolbox ul {
+    padding: 0;
+    margin: 10px 0;
+    list-style: none; }
+  .graph-toolbox li {
+    padding: 8px;
+    margin: 3px;
+    background-color: #e9e8d5;
+    cursor: pointer; }
 
 .code {
   font-family: Consolas;

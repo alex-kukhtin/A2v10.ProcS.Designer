@@ -29,7 +29,8 @@
 					{ name: 'State', template: 'State' },
 					{ name: 'Transition', template: 'Transition' },
 					{ name: 'EndSuccess', template: 'EndSuccess' },
-					{ name: 'EndError', template: 'EndError' }
+					{ name: 'EndError', template: 'EndError' },
+					{ name: 'Code', template: 'Code' }
 				]
 			};
 		},

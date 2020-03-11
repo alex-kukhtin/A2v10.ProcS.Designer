@@ -9,6 +9,7 @@
 	const MxEvent = window.mxEvent;
 	const MxChildChange = window.mxChildChange;
 	const MxCellAttributeChange = window.mxCellAttributeChange;
+	const MxStackLayout = window.mxStackLayout;
 
 	const eventBus = require('std:eventBus');
 	const moduleConstructor = require('std:model');
@@ -50,47 +51,14 @@
 		let m = ed.graph.model;
 		m.beginUpdate();
 		try {
-			//TODO: get parent for transition, code
 			let p0 = parent;
-			let autoSize = false;
-			if (shape.template === 'Transition') {
-				console.dir('insert with parent');
+			if (shape.template === 'Transition' || shape.template === 'Code') {
 				p0 = parentCell;
-				pos.x = 10;
-				pos.y = 40; // TODO - calc transtion pos
-				autoSize = true;
 			}
 			let vx = insertTemplatedVertex(ed, 'SSS', shape.template, pos, p0);
-			if (autoSize) {
-				stateLayout(p0);
-			}
 		} finally {
 			m.endUpdate();
 		}
-	}
-
-	function stateLayout(v) {
-		if (v.value.localName !== 'State') return;
-		let tr = [];
-		for (let i in v.children) {
-			let c = v.children[i];
-			if (c.value.localName === 'Transition')
-				tr.push(c);
-		}
-		console.dir(tr);
-		let pos = { x: 10, y: 40 };
-		for (let i in tr) {
-			let g = tr[i].geometry;
-			g.x = pos.x;
-			g.y = pos.y;
-			pos.y += 40;
-		}
-		let pg = v.getGeometry().clone();
-		if (pg.height === pos.y)
-			return;
-		pg.height = pos.y;
-		console.dir(graph.resizeCell);
-		graph.resizeCell(v, pg);
 	}
 
 	function init(editor, source) {
@@ -106,6 +74,21 @@
 			}
 		}
 
+		// Configures the automatic layout for the states and entries
+		editor.layoutSwimlanes = true;
+		editor.createSwimlaneLayout = function () {
+			var layout = new MxStackLayout(graph, false, 10, 0, 0, 10);
+			layout.fill = true;
+			layout.resizeParent = true;
+
+			// Overrides the function to always return true
+			layout.isVertexMovable = function (cell) {
+				return true;
+			};
+
+			return layout;
+		};
+
 		model.beginUpdate();
 		try {
 
@@ -120,16 +103,17 @@
 				let parent = insertTemplatedVertex(editor, s, state.$shape, state.$position);
 				setVertexAttributes(state, parent);
 				state.$vertex = parent;
+				let pos = { x: 0, y: 0 };
+				if (state.OnEntry) {
+					insertTemplatedVertex(editor, name, 'Entry', state.$position, parent);
+				}
 				if (state.Transitions) {
-					//insertTemplatedVertex(editor, '', "Entry", { x: 10, y: 40 }, parent);
-					let pos = { x: 0, y: 0 };
 					for (let t in state.Transitions) {
 						let trans = state.Transitions[t];
 						trans.$vertex = insertTemplatedVertex(editor, t, trans.$shape, pos, parent);
 						setVertexAttributes(trans, trans.$vertex);
 					}
 				}
-				stateLayout(state.$vertex);
 			}
 
 			let insertEdge = function insertEdge(from, toName) {
@@ -224,30 +208,11 @@
 			g.getModel().addListener(MxEvent.NOTIFY, (model, evt) => {
 				blur();
 				for (let ch of evt.properties.changes) {
-					if (ch instanceof MxChildChange) {
-						if (ch.previous && ch.previous.value) {
-							console.dir('notify');
-							console.dir(ch.previous);
-							stateLayout(ch.previous);
-							let m = ch.model;
-							//m.beginUpdate();
-							try {
-								//stateLayout(g, ch.previous);
-							} finally {
-								//m.endUpdate();
-							}
-						}
-					} else if (ch instanceof MxCellAttributeChange) {
+					if (ch instanceof MxCellAttributeChange) {
 						if (!ch.cell || !ch.cell.value) continue;
 						eventBus.$emit('cell.change', ch.cell);
 					}
 				}
-			});
-
-			g.addListener(MxEvent.CELLS_REMOVED, function (g, evt) {
-				//var cells = evt.getProperty('cells');
-				//let s1 = g.getModel().getCell('S1');
-				//stateLayout(s1);
 			});
 
 			g.getSelectionModel().addListener(MxEvent.CHANGE, (model, evt) => {
