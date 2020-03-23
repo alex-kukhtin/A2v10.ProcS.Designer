@@ -10,11 +10,16 @@
 	const MxChildChange = window.mxChildChange;
 	const MxCellAttributeChange = window.mxCellAttributeChange;
 	const MxStackLayout = window.mxStackLayout;
+	const MxMultiplicity = window.mxMultiplicity;
 
 	const eventBus = require('std:eventBus');
 	const moduleConstructor = require('std:model');
 
 	let graph = null;
+
+	function _dummy() {}
+
+	MxGraph.prototype.validationAlert = _dummy;
 
 	function getConfig() {
 		let xml = MxEditorConfig;
@@ -53,6 +58,9 @@
 		try {
 			let p0 = parent;
 			if (shape.template === 'Transition' || shape.template === 'Code') {
+				console.dir(parentCell);
+				if (parentCell === null)
+					return;
 				p0 = parentCell;
 			}
 			let vx = insertTemplatedVertex(ed, 'SSS', shape.template, pos, p0);
@@ -88,6 +96,13 @@
 
 			return layout;
 		};
+
+		graph.multiplicities.push(new MxMultiplicity(true, 'State', null, null, 1, 1, ['State', 'EndSuccess', 'EndError'], 'e1', 'e2'));
+		graph.multiplicities.push(new MxMultiplicity(true, 'Transition', null, null, 1, 1, ['State', 'EndSuccess', 'EndError'], 'e1', 'e2'));
+		graph.multiplicities.push(new MxMultiplicity(true, 'EndSuccess', null, null, 0, 0, null, 'e1', 'e2'));
+		graph.multiplicities.push(new MxMultiplicity(true, 'EndError', null, null, 0, 0, null, 'e1', 'e2'));
+
+		console.dir(graph.multiplicities);
 
 		model.beginUpdate();
 		try {

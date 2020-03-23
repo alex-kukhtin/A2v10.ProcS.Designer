@@ -36,13 +36,14 @@
 			</State>
 		</add>
 		<add as="Transition">
-			<Transition Name="" Condition="">
+			<Transition Name="" Condition="" Description="">
 				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;strokeColor=#999999;movable=0;">
 					<mxGeometry as="geometry" width="180" height="30"/>
 				</mxCell>
 				<properties>
 					<Name type="input" label="Name"/>
 					<Condition type="textarea" label="Condition"/>
+					<Description type="textarea" label="Description"/>
 				</properties>
 			</Transition>
 		</add>
@@ -62,6 +63,17 @@
 					<Code type="textarea" label="Code"/>
 				</properties>
 			</Code>
+		</add>
+		<add as="MyActivity">
+			<MyActivity Code="">
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#98dd99;strokeColor=#999999;movable=0;">
+					<mxGeometry as="geometry" width="150" height="30"/>
+				</mxCell>
+				<properties>
+					<Code type="textarea" label="Code"/>
+					<Memo type="textarea" label="Memo"/>
+				</properties>
+			</MyActivity>
 		</add>
 	</Array>
 	<mxGraph as="graph">

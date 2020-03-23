@@ -30,7 +30,8 @@
 					{ name: 'Transition', template: 'Transition' },
 					{ name: 'EndSuccess', template: 'EndSuccess' },
 					{ name: 'EndError', template: 'EndError' },
-					{ name: 'Code', template: 'Code' }
+					{ name: 'Code', template: 'Code' },
+					{ name: 'MyActivity', template: 'MyActivity' }
 				]
 			};
 		},
