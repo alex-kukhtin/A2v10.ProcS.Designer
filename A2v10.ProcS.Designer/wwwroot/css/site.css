@@ -30,6 +30,9 @@ body {
   display: grid;
   grid-template-columns: auto 1fr auto; }
 
+.editor-root {
+  height: 100%; }
+
 .graph-editor {
   display: grid;
   width: 100%;
@@ -42,7 +45,8 @@ body {
   grid-row: 2;
   background-color: #fcfcfc;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  overflow: auto; }
 
 .graph-properties {
   background-color: #f8fff9;

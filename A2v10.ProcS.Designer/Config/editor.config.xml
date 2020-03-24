@@ -37,7 +37,7 @@
 		</add>
 		<add as="Transition">
 			<Transition Name="" Condition="" Description="">
-				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;strokeColor=#999999;movable=0;">
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#ffccff;strokeColor=#999999;movable=0;portConstraint=eastwest;">
 					<mxGeometry as="geometry" width="180" height="30"/>
 				</mxCell>
 				<properties>

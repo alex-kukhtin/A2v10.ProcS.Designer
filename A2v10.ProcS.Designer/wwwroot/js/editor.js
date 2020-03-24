@@ -464,8 +464,10 @@ app.modules['std:model'] = function () {
 			return layout;
 		};
 
-		graph.multiplicities.push(new MxMultiplicity(true, 'State', null, null, 1, 1, ['State', 'EndSuccess', 'EndError'], 'e1', 'e2'));
-		graph.multiplicities.push(new MxMultiplicity(true, 'Transition', null, null, 1, 1, ['State', 'EndSuccess', 'EndError'], 'e1', 'e2'));
+		let targetStates = ['State', 'EndSuccess', 'EndError'];
+		graph.multiplicities.push(new MxMultiplicity(true, 'Start', null, null, 0, 1, targetStates, 'e1', 'e2'));
+		graph.multiplicities.push(new MxMultiplicity(true, 'State', null, null, 1, 1, targetStates, 'e1', 'e2'));
+		graph.multiplicities.push(new MxMultiplicity(true, 'Transition', null, null, 1, 1, targetStates, 'e1', 'e2'));
 		graph.multiplicities.push(new MxMultiplicity(true, 'EndSuccess', null, null, 0, 0, null, 'e1', 'e2'));
 		graph.multiplicities.push(new MxMultiplicity(true, 'EndError', null, null, 0, 0, null, 'e1', 'e2'));
 
