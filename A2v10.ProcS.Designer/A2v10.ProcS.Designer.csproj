@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="ClientApp\components\" />
     <Folder Include="wwwroot\css\fonts\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>

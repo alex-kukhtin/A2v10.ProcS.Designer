@@ -2,28 +2,28 @@
 <mxEditor>
 	<Array as="templates">
 		<add as="Start">
-			<Start>
+			<Start hasLabel = "false">
 				<mxCell vertex="1" style="shape=start;fillColor=#0691e5;strokeColor=#056fb0;resizable=0;">
 					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
 			</Start>
 		</add>
-		<add as="EndSuccess">
-			<EndSuccess>
+		<add as="EndSuccess" >
+			<EndSuccess hasLabel = "false">
 				<mxCell vertex="1" style="shape=endSuccess;fillColor=#57b557;strokeColor=#3c7d3c;resizable=0;">
 					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
 			</EndSuccess>
 		</add>
 		<add as="EndError">
-			<EndError>
+			<EndError hasLabel = "false">
 				<mxCell vertex="1" style="shape=endError;fillColor=#f5644a;strokeColor=#ba4b38;resizable=0;">
 					<mxGeometry as="geometry" width="40" height="40"/>
 				</mxCell>
 			</EndError>
 		</add>
 		<add as="State">
-			<State Name="">
+			<State Name="" Description="">
 				<mxCell vertex="1"
 						style="shape=swimlane;resizable=0;foldable=1;fillColor=azure;strokeColor=#999999;startSize=30;rounded=0;">
 					<mxGeometry as="geometry" width="200" height="70">
@@ -32,6 +32,7 @@
 				</mxCell>
 				<properties>
 					<Name type="input" label="Name"/>
+					<Description type="textarea" label="Description"/>
 				</properties>
 			</State>
 		</add>
@@ -55,12 +56,13 @@
 			</Entry>
 		</add>
 		<add as="Code">
-			<Code Code="">
+			<Code Code="" Description="">
 				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#f8dd8090;strokeColor=#999999;movable=0;">
 					<mxGeometry as="geometry" width="0" height="30"/>
 				</mxCell>
 				<properties>
 					<Code type="textarea" label="Code"/>
+					<Description type="textarea" label="Description"/>
 				</properties>
 			</Code>
 		</add>

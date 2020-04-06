@@ -269,6 +269,7 @@ app.modules['std:model'] = function () {
 				let node = this.model.value;
 				let ch = node.firstChild;
 				let r = [];
+				console.dir(node);
 				while (ch) {
 					if (ch.nodeName === 'properties') {
 						let sub = ch.firstChild;
@@ -286,6 +287,11 @@ app.modules['std:model'] = function () {
 			title: function () {
 				if (!this.model || !this.model.value)
 					return '';
+				let v = this.model.value;
+				let res = v.getAttribute('__res');
+				if (res) {
+					return res.split(':')[1];
+				}
 				return this.model.value.tagName;
 			}
 		},
@@ -387,6 +393,14 @@ app.modules['std:model'] = function () {
 	function _dummy() {}
 
 	MxGraph.prototype.validationAlert = _dummy;
+	MxGraph.prototype.getLabel = function (cell) {
+		if (cell.edge || !cell.value) return '';
+		let v = cell.value;
+		if (v.getAttribute('hasLabel') === 'false')
+			return '';
+		var desc = v.getAttribute('Description');
+		return desc || v.localName;
+	};
 
 	function getConfig() {
 		let xml = MxEditorConfig;
@@ -400,13 +414,16 @@ app.modules['std:model'] = function () {
 			document.activeElement.blur();
 	}
 
-	function insertTemplatedVertex(editor, name, shape, pos, p0) {
-		let tml = editor.templates[shape];
+	function insertTemplatedVertex(editor, name, val, shape, pos, p0) {
+		let tml = editor.templates[shape || 'State'];
 		let m = graph.model;
+		pos = pos || { x: 100, y: 100 };
 		p0 = p0 || graph.getDefaultParent();
 		let clone = m.cloneCell(tml);
 		if (name)
 			clone.id = name;
+		if (val && val.$res)
+			clone.setAttribute('__res', val.$res);
 		clone.geometry.x = pos.x;
 		clone.geometry.y = pos.y;
 		// value is xml-node
@@ -424,13 +441,13 @@ app.modules['std:model'] = function () {
 		m.beginUpdate();
 		try {
 			let p0 = parent;
-			if (shape.template === 'Transition' || shape.template === 'Code') {
+			if (shape.template === 'Transition' || shape.template !== 'State') {
 				console.dir(parentCell);
 				if (parentCell === null)
 					return;
 				p0 = parentCell;
 			}
-			let vx = insertTemplatedVertex(ed, 'SSS', shape.template, pos, p0);
+			let vx = insertTemplatedVertex(ed, 'SSS', null, shape.template, pos, p0);
 		} finally {
 			m.endUpdate();
 		}
@@ -471,30 +488,35 @@ app.modules['std:model'] = function () {
 		graph.multiplicities.push(new MxMultiplicity(true, 'EndSuccess', null, null, 0, 0, null, 'e1', 'e2'));
 		graph.multiplicities.push(new MxMultiplicity(true, 'EndError', null, null, 0, 0, null, 'e1', 'e2'));
 
-		console.dir(graph.multiplicities);
-
 		model.beginUpdate();
 		try {
 
 			// initial state
 			let init = { name: source.InitialState, pos: source.$initPosition, $vertex:null };
 
-			init.$vertex = insertTemplatedVertex(editor, 'Start', "Start", init.pos);
+			init.$vertex = insertTemplatedVertex(editor, name, 'Start', "Start", init.pos);
 
 			// vertices
 			for (let s in source.States) {
 				let state = source.States[s];
-				let parent = insertTemplatedVertex(editor, s, state.$shape, state.$position);
+				let parent = insertTemplatedVertex(editor, s, state, state.$shape, state.$position);
 				setVertexAttributes(state, parent);
 				state.$vertex = parent;
 				let pos = { x: 0, y: 0 };
 				if (state.OnEntry) {
-					insertTemplatedVertex(editor, name, 'Entry', state.$position, parent);
+					let onEntryV = insertTemplatedVertex(editor, name, null, 'Entry', state.$position, parent);
+					let ea = state.OnEntry.Activities;
+					if (ea) {
+						for (let a of ea) {
+							a.$vertex = insertTemplatedVertex(editor, null, a, 'Code', pos, onEntryV);
+							setVertexAttributes(a, a.$vertex);
+						}
+					}
 				}
 				if (state.Transitions) {
 					for (let t in state.Transitions) {
 						let trans = state.Transitions[t];
-						trans.$vertex = insertTemplatedVertex(editor, t, trans.$shape, pos, parent);
+						trans.$vertex = insertTemplatedVertex(editor, t, trans, trans.$shape, pos, parent);
 						setVertexAttributes(trans, trans.$vertex);
 					}
 				}
@@ -560,7 +582,8 @@ app.modules['std:model'] = function () {
 			},
 			constructModel: function () {
 				let codec = new MxCodec();
-				let xml = codec.encode(this.$editor.graph.getModel());
+				var m = this.$editor.graph.getModel();
+				let xml = codec.encode(m);
 				let model = moduleConstructor.constructModel(xml);
 				this.modelText = JSON.stringify(model, undefined, 2);
 			},

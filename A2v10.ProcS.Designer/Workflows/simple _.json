@@ -1,0 +1,46 @@
+﻿{
+	"InitialState": "S1",
+	"$initPosition": {"x": 300, "y": 50},
+	"States": {
+		"S1": {
+			"$shape": "State",
+			"Name": "FIRST STATE NAME",
+			"$position": {
+				"x": 220,
+				"y": 150
+			},
+			"OnEntry": {
+				"Code": "result.x = 55"
+			},
+			"Transitions": {
+				"T1": {
+					"$shape": "Transition",
+					"Name": "X are equal 1",
+					"Condition": "x == 1",
+					"To": "Error"
+				},
+				"T2": {
+					"$shape": "Transition",
+					"Name": "X are equal 2",
+					"Condition": "x == 2",
+					"To": "Success"
+				}
+			},
+			"NextState": "S1"
+		},
+		"Success": {
+			"$shape": "EndSuccess",
+			"$position": {
+				"x": 300,
+				"y": 400
+			}
+		},
+		"Error": {
+			"$shape": "EndError",
+			"$position": {
+				"x": 550,
+				"y": 190
+			}
+		}
+	}
+}

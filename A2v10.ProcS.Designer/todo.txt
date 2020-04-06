@@ -13,6 +13,8 @@ dragsource.html - для toolbar?
 13. Fold/Unfold image
 14. SCSS variables (font)
 15. Запретить копировать Transitions/Code
+16. Code в OnEntry/OnExit неправильно попадает в модель.
+17. 
 
 
 samples for:

@@ -1,45 +1,224 @@
 ﻿{
-	"InitialState": "S1",
-	"$initPosition": {"x": 300, "y": 50},
+	"$schema": "../../@schemas/statemachine-schema.json#",
+	"Description": "PaidDonor",
+	"InitialState": "WaitSurvey",
+	"$initPosition": {
+		"x": 40,
+		"y": 115
+	},
 	"States": {
-		"S1": {
-			"$shape": "State",
-			"Name": "FIRST STATE NAME",
+		"WaitSurvey": {
+			"Description": "Очікує ЛПОД",
 			"$position": {
-				"x": 220,
-				"y": 150
+				"x": 140,
+				"y": 30
 			},
 			"OnEntry": {
-				"Code": "result.x = 55"
+				"$res": "com.a2v10.procs:SequenceActivity",
+				"Activities": [
+					{
+						"Description": "Початок відвідування",
+						"$res": "com.a2v10.procs.sqlserver:ExecuteSqlActivity",
+						"Procedure": "a2bioprocs.[Visit.Start]",
+						"Parameters": {
+							"Instance": "{{instance.Id}}",
+							"Visit": "{{params.visitId}}"
+						}
+					},
+					{
+						"$res": "com.a2v10.procs:CallHttpApiActivity",
+						"Description": "Оновлення табло",
+						"Url": "{{env.Scoreboard.Url}}/api/hub/send",
+						"Method": "Post",
+						"Body": "{event: 'stateChange', visitId: params.visitId, donorId: params.donorId, state:instance.CurrentState}",
+						"HandleError": "Ignore"
+					},
+					{
+						"Description": "Очікування продовження",
+						"$res": "com.a2v10.procs:WaitResumeActivity",
+						"Bookmark": "WaitSurvey"
+					}
+				]
 			},
-			"Transitions": {
-				"T1": {
-					"$shape": "Transition",
-					"Name": "X are equal 1",
-					"Condition": "x == 1",
-					"To": "Error"
-				},
-				"T2": {
-					"$shape": "Transition",
-					"Name": "X are equal 2",
-					"Condition": "x == 2",
-					"To": "Success"
-				}
-			},
-			"NextState": "S1"
+			"NextState": "InviteSurvey"
 		},
-		"Success": {
+		"InviteSurvey": {
+			"$position": {"x": 380, "y": 50},
+			"Description": "Запрошено до ЛПОД",
+			"OnEntry": {
+				"$res": "com.a2v10.procs:SequenceActivity",
+				"Activities": [
+					{
+						"$res": "com.a2v10.procs:CallHttpApiActivity",
+						"Description": "Оновлення табло",
+						"Url": "{{env.Scoreboard.Url}}/api/hub/send",
+						"Method": "Post",
+						"Body": "{event: 'stateChange', visitId: params.visitId, donorId: params.donorId, state:instance.CurrentState}",
+						"HandleError": "Ignore"
+					},
+					{
+						"$res": "com.a2v10.procs:WaitResumeActivity",
+						"Description": "Очікування продовження",
+						"Bookmark": "InviteSurvey"
+					}
+				]
+			},
+			"NextState": "Survey"
+		},
+		"Survey": {
+			"$position": {
+				"x": 620,
+				"y": 50
+			},
+			"Description": "Обстежується в ЛПОД",
+			"OnEntry": {
+				"$res": "com.a2v10.procs:SequenceActivity",
+				"Activities": [
+					{
+						"$res": "com.a2v10.procs:CallHttpApiActivity",
+						"Description": "Оновлення табло",
+						"Code": "x = 5",
+						"Url": "{{env.Scoreboard.Url}}/api/hub/send",
+						"Method": "Post",
+						"Body": "{event: 'stateChange', visitId: params.visitId, donorId: params.donorId, state:instance.CurrentState}",
+						"HandleError": "Ignore"
+					},
+					{
+						"$res": "com.a2v10.procs:WaitResumeActivity",
+						"Description": "Очікування продовження",
+						"Bookmark": "Survey"
+					}
+				]
+			},
+			"NextState": "WaitDoctor"
+		},
+		"WaitDoctor": {
+			"Description": "Очікує терапевта",
+			"$position": {
+				"x": 620,
+				"y": 300
+			},
+			"OnEntry": {
+				"$res": "com.a2v10.procs:SequenceActivity",
+				"Activities": [
+					{
+						"$res": "com.a2v10.procs:WaitResumeActivity",
+						"Description": "Очікування продовження",
+						"Bookmark": "WaitDoctor"
+					}
+				]
+			},
+			"NextState": "InviteDoctor"
+		},
+		"InviteDoctor": {
+			"Description": "Запрошено до терапевта",
+			"$position": {
+				"x": 380,
+				"y": 280
+			},
+			"OnEntry": {
+				"$res": "com.a2v10.procs:SequenceActivity",
+				"Activities": [
+					{
+						"$res": "com.a2v10.procs:CallHttpApiActivity",
+						"Description": "Оновлення табло",
+						"Url": "{{env.Scoreboard.Url}}/api/hub/send",
+						"Method": "Post",
+						"Body": "{event: 'stateChange', visitId: params.visitId, donorId: params.donorId, state:instance.CurrentState}",
+						"HandleError": "Ignore"
+					},
+					{
+						"$res": "com.a2v10.procs:WaitResumeActivity",
+						"Description": "Очікування продовження",
+						"Bookmark": "InviteDoctor"
+					}
+				]
+			},
+			"NextState": "Doctor"
+		},
+		"Doctor": {
+			"Description": "Обстежується терапевтом",
+			"$position": {
+				"x": 140,
+				"y": 280
+			},
+			"OnEntry": {
+				"$res": "com.a2v10.procs:SequenceActivity",
+				"Activities": [
+					{
+						"$res": "com.a2v10.procs:CallHttpApiActivity",
+						"Description": "Оновлення табло",
+						"Url": "{{env.Scoreboard.Url}}/api/hub/send",
+						"Method": "Post",
+						"Body": "{event: 'stateChange', visitId: params.visitId, donorId: params.donorId, state:instance.CurrentState}",
+						"HandleError": "Ignore"
+					},
+					{
+						"$res": "com.a2v10.procs:WaitResumeActivity",
+						"Description": "Очікування продовження",
+						"Bookmark": "Doctor"
+					}
+				]
+			},
+			"NextState": "WaitDonation"
+		},
+		"WaitDonation": {
+			"Description": "Очікує на донацію",
+			"$position": {
+				"x": 140,
+				"y": 520
+			},
+			"OnEntry": {
+				"$res": "com.a2v10.procs:SequenceActivity",
+				"Activities": [
+					{
+						"$res": "com.a2v10.procs:CallHttpApiActivity",
+						"Description": "Оновлення табло",
+						"Url": "{{env.Scoreboard.Url}}/api/hub/send",
+						"Method": "Post",
+						"Body": "{event: 'stateChange', visitId: params.visitId, donorId: params.donorId, state:instance.CurrentState}",
+						"HandleError": "Ignore"
+					},
+					{
+						"$res": "com.a2v10.procs:WaitResumeActivity",
+						"Description": "Очікування продовження",
+						"Bookmark": "WaitDonation"
+					}
+				]
+			},
+			"NextState": "Donation"
+		},
+		"Donation": {
+			"Description": "Донація",
+			"$position": {
+				"x": 380,
+				"y": 520
+			},
+			"OnEntry": {
+				"$res": "com.a2v10.procs:SequenceActivity",
+				"Activities": [
+					{
+						"$res": "com.a2v10.procs:CallHttpApiActivity",
+						"Description": "Оновлення табло",
+						"Url": "{{env.Scoreboard.Url}}/api/hub/send",
+						"Method": "Post",
+						"Body": "{event: 'stateChange', visitId: params.visitId, donorId: params.donorId, state:instance.CurrentState}",
+						"HandleError": "Ignore"
+					},
+					{
+						"$res": "com.a2v10.procs:WaitResumeActivity",
+						"Description": "Очікування продовження",
+						"Bookmark ": "Donation"
+					}
+				]
+			},
+			"NextState": "End"
+		},
+		"End": {
 			"$shape": "EndSuccess",
 			"$position": {
-				"x": 300,
-				"y": 400
-			}
-		},
-		"Error": {
-			"$shape": "EndError",
-			"$position": {
-				"x": 550,
-				"y": 190
+				"x": 670,
+				"y": 585
 			}
 		}
 	}

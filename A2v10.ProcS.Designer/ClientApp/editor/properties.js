@@ -93,6 +93,7 @@
 				let node = this.model.value;
 				let ch = node.firstChild;
 				let r = [];
+				console.dir(node);
 				while (ch) {
 					if (ch.nodeName === 'properties') {
 						let sub = ch.firstChild;
@@ -110,6 +111,11 @@
 			title: function () {
 				if (!this.model || !this.model.value)
 					return '';
+				let v = this.model.value;
+				let res = v.getAttribute('__res');
+				if (res) {
+					return res.split(':')[1];
+				}
 				return this.model.value.tagName;
 			}
 		},
