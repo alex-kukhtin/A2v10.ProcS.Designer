@@ -23,6 +23,6 @@
 			"ClientApp/editor/toolbox.js",
 			"ClientApp/editor/editor.js"
 		],
-		"minify": {"enabled": false }
+		"minify": { "enabled": false }
 	}
 ]

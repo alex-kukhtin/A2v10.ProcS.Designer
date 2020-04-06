@@ -7,14 +7,14 @@ dragsource.html - для toolbar?
 6. Реальная модель 
 8. Condition AutoSize
 9. Connector constraints
-10. Тексты getLabel?
 11. OnEntry, OnExit
 12. Toolbar
 13. Fold/Unfold image
 14. SCSS variables (font)
 15. Запретить копировать Transitions/Code
 16. Code в OnEntry/OnExit неправильно попадает в модель.
-17. 
+17. Code to code -> Disablle
+18. 
 
 
 samples for:

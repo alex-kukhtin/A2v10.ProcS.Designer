@@ -21,8 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Config\editor.config.xml" />
-    <Content Include="Config\editor.shapes.xml" />
+    <Content Include="Config\editor.config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\editor.shapes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scss\main.scss" />
   </ItemGroup>
 
@@ -35,6 +39,12 @@
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Workflows\simple.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 

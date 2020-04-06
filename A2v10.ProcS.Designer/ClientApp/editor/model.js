@@ -39,9 +39,30 @@ app.modules['std:model'] = function () {
 			return t;
 		}
 
-		function addEntries(entry, activities)
-		{
-			console.dir(activities);
+		function createActivity(a) {
+			var r = {};
+			console.dir(a);
+			let res = a.getAttribute('__res');
+			if (res)
+				r.$res = res;
+			return r;
+		}
+
+		function addEntries(entry, activities) {
+			if (!activities && !activities.length) return;
+			let cnt = activities.length;
+			if (cnt == 1) {
+
+			} else {
+				entry.OnEntry = {
+					$res: "com.a2v10.procs:SequenceActivity",
+					Activities: []
+				}
+				let target = entry.OnEntry.Activities;
+				for (let a of activities) {
+					target.push(createActivity(a.node));
+				}
+			}
 		}
 
 		function createState(v) {
@@ -51,10 +72,8 @@ app.modules['std:model'] = function () {
 				Name: v.node.getAttribute("Name")
 			};
 			if (v.entry) {
-				state.OnEntry = {};
 				let entries = model.a.filter(x => x.parent === v.entry.id);
-				addEntries(state.OnEntry, entries);
-				console.dir(entries);
+				addEntries(state, entries);
 			}
 			if (v.transitions) {
 				state.Transitions = {};

@@ -25,7 +25,9 @@
 	background-color:#f8fff9;
 	grid-column:3;
 	grid-row:2;
-	width:240px;
+	min-width:340px;
+	width:auto;
+	border-left:1px solid #ccc;
 }
 
 .graph-toolbar {
