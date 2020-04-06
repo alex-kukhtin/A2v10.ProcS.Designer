@@ -12,6 +12,8 @@
   <ItemGroup>
     <None Remove="ClientApp\app.js.map" />
     <None Remove="ClientApp\app.ts" />
+    <None Remove="Config\editor.config.xml" />
+    <None Remove="Config\editor.shapes.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Config\editor.config.xml" />
+    <Content Include="Config\editor.shapes.xml" />
     <Content Include="Scss\main.scss" />
   </ItemGroup>
 

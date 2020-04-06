@@ -39,6 +39,11 @@ app.modules['std:model'] = function () {
 			return t;
 		}
 
+		function addEntries(entry, activities)
+		{
+			console.dir(activities);
+		}
+
 		function createState(v) {
 			let state = {
 				$shape: v.type,
@@ -47,6 +52,9 @@ app.modules['std:model'] = function () {
 			};
 			if (v.entry) {
 				state.OnEntry = {};
+				let entries = model.a.filter(x => x.parent === v.entry.id);
+				addEntries(state.OnEntry, entries);
+				console.dir(entries);
 			}
 			if (v.transitions) {
 				state.Transitions = {};
@@ -56,7 +64,6 @@ app.modules['std:model'] = function () {
 				}
 			}
 			if (v.edge) {
-				console.dir(v.edge);
 				state.NextState = v.edge.id;
 			}
 			return state;
@@ -78,7 +85,7 @@ app.modules['std:model'] = function () {
 	function constructModel(xml) {
 
 		let cells = {
-			v: {}, e: []
+			v: {}, e: [], a:[]
 		};
 		let ch = xml.firstChild;  // root
 		ch = ch.firstElementChild; // cells
@@ -115,6 +122,9 @@ app.modules['std:model'] = function () {
 				delete cells.v[vn];
 			} else if (v.type === 'Entry') {
 				p.entry = v;
+				delete cells.v[vn];
+			} else if (v.type === 'Code') {
+				cells.a.push(v);
 				delete cells.v[vn];
 			}
 		}
