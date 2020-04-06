@@ -142,7 +142,7 @@ app.modules['std:model'] = function () {
 			} else if (v.type === 'Entry') {
 				p.entry = v;
 				delete cells.v[vn];
-			} else if (v.type === 'Code') {
+			} else {
 				cells.a.push(v);
 				delete cells.v[vn];
 			}
@@ -249,9 +249,11 @@ app.modules['std:model'] = function () {
 	const inputProp = {
 		extends: baseProp,
 		template: `
-<div>
+<div class="control">
 	<label v-text="label"/>
-	<input v-bind:value="modelValue()" v-on:change="onChange($event.target.value)" ref="input"/>
+	<div class="input-group">
+		<input v-bind:value="modelValue()" v-on:change="onChange($event.target.value)" ref="input"/>
+	</div>
 </div>
 `
 	};
@@ -259,9 +261,11 @@ app.modules['std:model'] = function () {
 	const textareaProp = {
 		extends: baseProp,
 		template: `
-<div>
+<div class="control">
 	<label v-text="label"/>
-	<textarea v-bind:value="modelValue()" v-on:change="onChange($event.target.value)" ref="input"/>
+	<div class="input-group">
+		<textarea rows="4" v-bind:value="modelValue()" v-on:change="onChange($event.target.value)" ref="input"/>
+	</div>
 </div>
 `
 	};
@@ -269,7 +273,7 @@ app.modules['std:model'] = function () {
 	Vue.component("a2-graph-properties", {
 		template: 
 `<div class="graph-properties" :key="updateKey">
-	<div v-if="visible">
+	<div v-if="visible" class="prop-grid">
 		<h4 v-text="title"></h4>
 		<component :is="p.type" v-for="p in modelProps" :prop="p" :model="model" :updateValue="updateValue" />
 	</div>
@@ -444,7 +448,13 @@ app.modules['std:model'] = function () {
 	}
 
 	function insertTemplatedVertex(editor, name, val, shape, pos, p0) {
-		let tml = editor.templates[shape || 'State'];
+		let tml = null;
+		if (val && val.$res) {
+			let sh = val.$res.split(':')[1];
+			tml = editor.templates[sh];
+		}
+		if (!tml)
+			tml = editor.templates[shape || 'State'];
 		let m = graph.model;
 		pos = pos || { x: 100, y: 100 };
 		p0 = p0 || graph.getDefaultParent();

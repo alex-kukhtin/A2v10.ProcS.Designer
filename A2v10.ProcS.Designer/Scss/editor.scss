@@ -28,6 +28,13 @@
 	min-width:340px;
 	width:auto;
 	border-left:1px solid #ccc;
+
+	.prop-grid {
+		padding:20px;
+		h4  {
+			margin:0 0 10px 0;
+		}
+	}
 }
 
 .graph-toolbar {

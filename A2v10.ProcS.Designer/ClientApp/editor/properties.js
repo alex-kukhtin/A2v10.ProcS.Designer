@@ -44,9 +44,11 @@
 	const inputProp = {
 		extends: baseProp,
 		template: `
-<div>
+<div class="control">
 	<label v-text="label"/>
-	<input v-bind:value="modelValue()" v-on:change="onChange($event.target.value)" ref="input"/>
+	<div class="input-group">
+		<input v-bind:value="modelValue()" v-on:change="onChange($event.target.value)" ref="input"/>
+	</div>
 </div>
 `
 	};
@@ -54,9 +56,11 @@
 	const textareaProp = {
 		extends: baseProp,
 		template: `
-<div>
+<div class="control">
 	<label v-text="label"/>
-	<textarea v-bind:value="modelValue()" v-on:change="onChange($event.target.value)" ref="input"/>
+	<div class="input-group">
+		<textarea rows="4" v-bind:value="modelValue()" v-on:change="onChange($event.target.value)" ref="input"/>
+	</div>
 </div>
 `
 	};
@@ -64,7 +68,7 @@
 	Vue.component("a2-graph-properties", {
 		template: 
 `<div class="graph-properties" :key="updateKey">
-	<div v-if="visible">
+	<div v-if="visible" class="prop-grid">
 		<h4 v-text="title"></h4>
 		<component :is="p.type" v-for="p in modelProps" :prop="p" :model="model" :updateValue="updateValue" />
 	</div>

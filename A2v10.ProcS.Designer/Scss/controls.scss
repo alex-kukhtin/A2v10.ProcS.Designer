@@ -1,0 +1,17 @@
+﻿
+.control {
+	display:flex;
+	flex-direction:column;
+
+	margin-bottom:20px;
+
+	label {
+		display:block;
+		color:#777;
+	}
+	.input-group {
+		input, textarea, select {
+			width:100%;
+		}
+	}
+}

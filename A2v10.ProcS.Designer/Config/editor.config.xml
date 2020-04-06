@@ -25,7 +25,7 @@
 		<add as="State">
 			<State Name="" Description="">
 				<mxCell vertex="1"
-						style="shape=swimlane;resizable=0;foldable=1;fillColor=azure;strokeColor=#999999;startSize=30;rounded=0;">
+						style="shape=swimlane;resizable=0;foldable=1;fillColor=azure;strokeColor=#999999;startSize=30;rounded=0;swimlaneFillColor=#ffffff">
 					<mxGeometry as="geometry" width="200" height="70">
 						<mxRectangle as="alternateBounds" width="200" height="70" />
 					</mxGeometry>
@@ -50,7 +50,7 @@
 		</add>
 		<add as="Entry">
 			<Entry>
-				<mxCell vertex="1" style="shape=swimlane;resizable=0;fillColor=#23dd9050;strokeColor=#999999;movable=0;startSize=30;foldable=1;">
+				<mxCell vertex="1" style="shape=swimlane;resizable=0;fillColor=#23dd9050;strokeColor=#999999;movable=0;startSize=30;foldable=1;swimlaneFillColor=#fffff8;">
 					<mxGeometry as="geometry" width="180" height="30"/>
 				</mxCell>
 			</Entry>
@@ -76,6 +76,40 @@
 					<Memo type="textarea" label="Memo"/>
 				</properties>
 			</MyActivity>
+		</add>
+		<add as="CallHttpApiActivity">
+			<CallHttpApiActivity Url="" Body="" Description="">
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#f3fdc9;strokeColor=#999999;movable=0;">
+					<mxGeometry as="geometry" width="150" height="30"/>
+				</mxCell>
+				<properties>
+					<Url type="input" label="Url"/>
+					<Body type="textarea" label="Body"/>
+					<Description type="textarea" label="Description"/>
+				</properties>
+			</CallHttpApiActivity>
+		</add>
+		<add as="WaitResumeActivity">
+			<WaitResumeActivity Description="" Bookmark="">
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#f8dd8090;strokeColor=#999999;movable=0;">
+					<mxGeometry as="geometry" width="150" height="30"/>
+				</mxCell>
+				<properties>
+					<Bookmark type="input" label="Bookmark"/>
+					<Description type="textarea" label="Description"/>
+				</properties>
+			</WaitResumeActivity>
+		</add>
+		<add as="ExecuteSqlActivity">
+			<ExecuteSqlActivity Procedure="" Description="">
+				<mxCell vertex="1" style="shape=rect;resizable=0;fillColor=#f8dd8090;strokeColor=#999999;movable=0;">
+					<mxGeometry as="geometry" width="0" height="30"/>
+				</mxCell>
+				<properties>
+					<Procedure type="input" label="Procedure"/>
+					<Description type="textarea" label="Description"/>
+				</properties>
+			</ExecuteSqlActivity>
 		</add>
 	</Array>
 	<mxGraph as="graph">

@@ -42,7 +42,13 @@
 	}
 
 	function insertTemplatedVertex(editor, name, val, shape, pos, p0) {
-		let tml = editor.templates[shape || 'State'];
+		let tml = null;
+		if (val && val.$res) {
+			let sh = val.$res.split(':')[1];
+			tml = editor.templates[sh];
+		}
+		if (!tml)
+			tml = editor.templates[shape || 'State'];
 		let m = graph.model;
 		pos = pos || { x: 100, y: 100 };
 		p0 = p0 || graph.getDefaultParent();

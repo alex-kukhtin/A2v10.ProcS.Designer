@@ -2,6 +2,8 @@
 html {
 	height:100%;
 	width:100%;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size:14px;
 }
 
 body {
@@ -14,6 +16,7 @@ body {
 
 @import "icon.scss";
 @import "toolbox.scss";
+@import "controls.scss";
 @import "designer.scss";
 @import "editor.scss";
 

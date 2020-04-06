@@ -142,7 +142,7 @@ app.modules['std:model'] = function () {
 			} else if (v.type === 'Entry') {
 				p.entry = v;
 				delete cells.v[vn];
-			} else if (v.type === 'Code') {
+			} else {
 				cells.a.push(v);
 				delete cells.v[vn];
 			}
